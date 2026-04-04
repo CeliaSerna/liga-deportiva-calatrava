@@ -21,7 +21,7 @@ mongoose.connect('mongodb://c123elia:IESCalatrava@ac-2cswkyn-shard-00-00.opzwkjx
 //  console.log('Servidor backend en http://localhost:3000');
 //});
 
-// usamos el puerto de Render o el 3000 para local
+// Usamos el puerto de Render o el 3000 para local
 const PORT = process.env.PORT || 3000;
 
 // Arrancamos el servidor escuchando en '0.0.0.0'
