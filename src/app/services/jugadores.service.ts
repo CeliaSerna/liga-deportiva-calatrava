@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class JugadoresService {
   // URL que no existe pero el Test la capturará
-  private apiUrl = '/api/jugadores';
+  private apiUrl = 'http://localhost:3000/api/jugadores';
 
   constructor(private http: HttpClient) { }
 
