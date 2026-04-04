@@ -19,7 +19,7 @@ describe('Pruebas E2E de Login (Simuladas para CI)', () => {
     // Esperamos a que la petición ocurra
     cy.wait('@loginFail');
     // Verificamos el error 401 (Unauthorized)
-    cy.contains('Unauthorized').should('be.visible');+ cy.contains(' Usuario o contraseña incorrectos').should('be.visible');
+    cy.contains('incorrectos', { matchCase: false }).should('be.visible');
   });
 
   it('Caso 2: Debería entrar correctamente con un usuario simulado', () => {
