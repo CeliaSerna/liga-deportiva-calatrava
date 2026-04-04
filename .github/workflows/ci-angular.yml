@@ -31,5 +31,7 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           install: false # Ya se hizo
-          start: npm start # Arranca la app antes de los tests
+          start: npm run frontend
           wait-on: 'http://localhost:4200' # Espera a que la app esté lista
+           # Ejecutamos Cypress directamente
+          command: npm run cypress:run
