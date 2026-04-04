@@ -14,7 +14,7 @@ describe('Pruebas E2E de Login (Simuladas para CI)', () => {
     
     cy.get('input[name="usuario"]').type('usuario_falso');
     cy.get('input[name="password"]').type('password_incorrecta');
-    cy.get('button[type="submit"]').click(); //Hacemos clic en el botón de entrar
+    cy.get('button[type="submit"]').dblclick(); //Hacemos doble clic en el botón de entrar
 
     // Esperamos a que la petición ocurra
     cy.wait('@loginFail');
