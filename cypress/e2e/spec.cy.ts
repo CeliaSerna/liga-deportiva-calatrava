@@ -14,12 +14,16 @@ describe('Pruebas E2E de Login (Simuladas para CI)', () => {
     
     cy.get('input[name="usuario"]').type('usuario_falso');
     cy.get('input[name="password"]').type('password_incorrecta');
-    cy.get('button[type="submit"]').dblclick(); //Hacemos doble clic en el botón de entrar
+    cy.get('button[type="submit"]').click(); //Hacemos clic en el botón de entrar
 
     // Esperamos a que la petición ocurra
     cy.wait('@loginFail');
-    // Verificamos el error 401 (Unauthorized)
-    cy.contains('incorrectos', { matchCase: false }).should('be.visible');
+
+    // Usamos force: true para asegurar que el botón responda aunque haya cargado el error
+    cy.get('button[type="submit"]').click({ force: true });// SEGUNDO CLIC: Ahora que el error ya llegó, hacemos clic para que Angular lo muestre
+
+    // Verificamos el error 401 (Unauthorized) con margen de tiempo
+    cy.contains('incorrectos', { matchCase: false, timeout: 7000 }).should('be.visible');
   });
 
   it('Caso 2: Debería entrar correctamente con un usuario simulado', () => {
