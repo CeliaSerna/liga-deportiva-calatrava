@@ -14,7 +14,7 @@ app.use('/api', authRoutes);
 app.use(express.static(path.join(__dirname, '../dist/liga-deportiva-calatrava/browser')));
 
 //Si se pide cualquier cosa que no sea /api, se manda al index.html de Angular
-app.get('*', (req, res) => {
+app.get('(.*)', (req, res) => {// hay que poner el * en comillas porque da error en express
   res.sendFile(path.join(__dirname, '../dist/liga-deportiva-calatrava/browser/index.html'));
 });
 
