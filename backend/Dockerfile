@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
     unzip
 
 # Instalar extensiones de PHP
-RUN apt-get update && apt-get install -y libpq-dev && docker-php-ext-install pdo_pgsql pdo_mysql
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
 # Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -20,9 +20,9 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www
 COPY . .
 
-RUN composer install --no-dev --optimize-autoloader
+# Instalar dependencias sin ejecutar scripts que conecten a BD
+RUN composer install --no-dev --optimize-autoloader --no-scripts
 
-CMD php artisan serve --host=0.0.0.0 --port=$PORT
-
-RUN php artisan migrate:fresh --seed --force
-CMD ["php-fpm"]
+# COMANDO FINAL: Solo arrancar el servidor
+# Usamos el puerto 10000 que es el estándar de Render
+CMD php artisan serve --host=0.0.0.0 --port=10000
