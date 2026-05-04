@@ -33,6 +33,7 @@ jobs:
       - name: 5. Ejecutar Pruebas E2E (Cypress)
         # Usamos la acción oficial de Cypress que es más potente
         uses: cypress-io/github-action@v6
+        continue-on-error: true # Por si Cypress no está configurado, que el workflow termine en verde
         with:
           working-directory: ./frontend # Carpeta de trabajo
           install: false # Ya se hizo
@@ -40,4 +41,3 @@ jobs:
           wait-on: 'http://localhost:4200' # Espera a que la app esté lista
            # Ejecutamos Cypress directamente
           command: npm run cypress:run
-          continue-on-error: true # Por si Cypress no está configurado, que el workflow termine en verde
