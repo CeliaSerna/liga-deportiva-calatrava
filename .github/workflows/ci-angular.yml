@@ -1,0 +1,37 @@
+name: Angular CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master ] # Se ejecuta al subir a estas ramas
+  pull_request:
+    branches: [ main, master ] # Se ejecuta al abrir un PR
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest # Usamos un servidor Linux
+
+    steps:
+      - name: 1. Descargar código
+        uses: actions/checkout@v4
+
+      - name: 2. Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24 # la versión que uso
+          cache: 'npm'
+
+      - name: 3. Instalar dependencias
+        run: npm ci --legacy-peer-deps
+
+      - name: 4. Ejecutar Pruebas Unitarias (Karma)
+        run: npm run test:ci
+
+      - name: 5. Ejecutar Pruebas E2E (Cypress)
+        # Usamos la acción oficial de Cypress que es más potente
+        uses: cypress-io/github-action@v6
+        with:
+          install: false # Ya se hizo
+          start: npm run frontend
+          wait-on: 'http://localhost:4200' # Espera a que la app esté lista
+           # Ejecutamos Cypress directamente
+          command: npm run cypress:run

@@ -1,0 +1,20 @@
+<div class="login-container text-center mt-5">
+
+  <h2>Inicio de sesión</h2>
+
+  <form (ngSubmit)="login()" class="mt-3 w-50 mx-auto">
+    <div class="mb-3">
+      <input type="text" [(ngModel)]="usuario" name="usuario" placeholder="Usuario" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <input type="password" [(ngModel)]="password" name="password" placeholder="Contraseña" class="form-control" required>
+    </div>
+
+    <button type="submit" class="btn btn-outline-dark">Entrar</button>
+  </form>
+
+  <!-- Mensaje de error -->
+<p style="color:red" *ngIf="error">{{ error }}</p>
+
+</div>
