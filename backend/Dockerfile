@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
     unzip
 
 # Instalar extensiones de PHP
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+RUN apt-get update && apt-get install -y libpq-dev && docker-php-ext-install pdo_pgsql pdo_mysql
 
 # Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
