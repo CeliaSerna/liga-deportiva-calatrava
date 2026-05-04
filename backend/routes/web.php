@@ -1,11 +1,18 @@
-use Illuminate\Support\Facades\Artisan;
+<?php
 
-Route::get('/instalar-todo', function () {
-    try {
-        // Esto crea las tablas y mete los usuarios del Seeder
-        Artisan::call('migrate:fresh --seed --force');
-        return "Éxito: Tablas creadas y usuarios admin y lector listos.";
-    } catch (\Exception $e) {
-        return "Error: " . $e->getMessage();
-    }
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('welcome');
 });
