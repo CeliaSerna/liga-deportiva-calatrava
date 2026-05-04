@@ -12,6 +12,8 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->statefulApi();    //CORS
+        
         // aqui indico que middlleware existe y se llama admin
         $middleware->alias([
         'admin' => \App\Http\Middleware\CheckAdmin::class,
