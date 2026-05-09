@@ -1,5 +1,6 @@
 <?php
     
+use App\Http\Controllers\AuthController; 
 use App\Http\Controllers\Api\ClubController;
 use App\Http\Controllers\Api\JugadorController;
 use App\Http\Controllers\Api\LigaController;
@@ -12,6 +13,7 @@ Route::get('clubs', [ClubController::class, 'index']);
 Route::get('jugadores', [JugadorController::class, 'index']);
 Route::get('ligas', [LigaController::class, 'index']);
 Route::get('partidos', [PartidoController::class, 'index']);
+Route::post('/login', [AuthController::class, 'login']);
 
 // Rutas protegidas (Solo para administradores)
 Route::middleware(['admin'])->group(function () {   

@@ -1,8 +1,69 @@
-<div class="login-container text-center mt-5">
-    <h2>Área privada de la Liga deportiva del I.E.S. Maestre de Calatrava</h2>
-    <p class="fs-4 pt-4">Bienvenid@ {{ usuario }}, </p>
+<div class="row mt-5">
+    <h2 class="ms-3">Área privada de la Liga deportiva del I.E.S. Maestre de Calatrava.</h2>
+    <p class="fs-4 pt-4 ms-3"> Bienvenido {{ usuario }}. </p>
+    
+     <div class="col-12 col-md-6 mb-5">
+        
+        <!-- SECCIÓN PARA ADMINISTRADOR -->
+        <section *ngIf="rol === 1" class="mt-5 w-50 mx-auto"> <!-- rol 1 es administrador-->
+            <h2 class=" mb-3"> Registrar nuevo club</h2>
+            <form class="club-form">
+            <div class="form-group">
+                <label>Nombre del Club:</label>
+                <input type="text" class="form-control mt-3 mb-3" name="nombre">
+            </div>
+            <div class="form-group">
+                <label>Ciudad:</label>
+                <input type="text" class="form-control mt-3 mb-3" name="ciudad">
+            </div>
+                <button type="submit" class="btn btn-outline-dark mt-3">Guardar Club</button>
+            </form>
+        </section>
 
-    <p class="fs-4"> Tu rol es: <strong>{{ rol }}</strong>
-    </p>
+        <!--SECCIÓN PARA USUARIO NORMAL -->
+        <div *ngIf="rol === 0" class="info-alert"> <!-- rol 0 es ususario-->
+            <p class= "ms-3 fs-5 alert alert-warning rounded-4 shadow-sm">No puedes registrar clubes porque no tienes permiso de administrador.</p>
+        </div>
+    </div>
 
-</div>
+    <div class="col-12 col-md-6 mb-5">
+    <!-- SECCIÓN PARA USUARIO (O AMBOS) -->
+        <section class="user-section mt-5 w-50 mx-auto">
+            <h2 class=" mb-3"> Clubs registrados</h2>
+            <div *ngIf="listaClubs && listaClubs.length > 0; else noData" class="table-responsive shadow-sm rounded-3 border">    
+            <!--  datos de API de Laravel  -->
+            <table class="table table-hover mb-0">
+                <thead class="table-secondary">
+                <tr>
+                    <th>NOMBRE</th>
+                    <th>CIUDAD</th>
+                    <th>CATEGORÍA</th>
+                    <th *ngIf="rol === 1"></th>
+                </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                <tr *ngFor="let club of listaClubs">
+                    <td class="text-primary">{{ club.nombre }}</td>
+                    <td>{{ club.ciudad }} </td>
+                    <td>{{ club.categoria }}</td>
+                    <td *ngIf="rol === 1">
+                    <button class="btn btn-outline-dark">Editar</button> <button class="btn btn-outline-danger">Eliminar</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+
+            <!-- Plantilla para cuando no hay datos -->
+            <ng-template #noData>
+            <div class="alert alert-info mt-4 fs-5">
+                Actualmente no hay clubes registrados en la base de datos.
+            </div>
+            </ng-template>
+        </section>
+    </div>
+</div>         
+
+
+
+

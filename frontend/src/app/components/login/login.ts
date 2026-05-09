@@ -20,14 +20,22 @@ export class LoginComponent {
   constructor(private auth: AuthService, private router: Router) {}
 
   login() {
-    this.auth.login(this.usuario, this.password).subscribe({
-      next: (user: any) => {
-          console.log(user); // para  ver si manda el nombre
+    const datosLogin = {
+    email: this.usuario, 
+    password: this.password
+    };
+
+    this.auth.login(datosLogin).subscribe({
+      next: (res: any) => {
+        // Guarda el token para usarlo en otras peticiones
+          localStorage.setItem('token', res.token);
+          //console.log('¡Login exitoso!', res);
           this.router.navigate(['/rol'], {
-            queryParams: { usuario: user.usuario, rol: user.role }
+            queryParams: { usuario: res.user.name, rol: res.user.role }// nombres de las columnas en la base de datos
           });
       },
-      error: () => {
+      error: (err) => {
+        console.error(err);
         this.error = 'Usuario o contraseña incorrectos';
     }
     });
