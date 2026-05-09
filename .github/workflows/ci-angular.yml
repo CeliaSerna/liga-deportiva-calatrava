@@ -8,6 +8,9 @@ jobs:
   # 1. ETAPA DE INSTALACIÓN Y PRUEBAS
   build-and-test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
     steps:
       - name: Descargar código
         uses: actions/checkout@v4
