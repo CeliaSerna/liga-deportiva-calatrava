@@ -8,12 +8,8 @@
         "php": "^8.2",
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",
-<<<<<<< HEAD
-        "laravel/tinker": "^2.9"
-=======
         "laravel/tinker": "^2.9",
         "tymon/jwt-auth": "^2.3"
->>>>>>> 34ce50f (Inicion de sesión como admin, registro nuevo clubes y mostrar clubes registrados)
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
