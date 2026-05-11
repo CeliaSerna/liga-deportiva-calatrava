@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Administrador',
             'email' => 'admin@liga-calatrava.com',
-            'password' => Hash::make('admin1234'),
+            'password' => Hash::make('admin1234'), // para que encripte la contraseña
             'role' => 1, 
         ]);
 
