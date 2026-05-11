@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     zip \
     unzip
+    libpq-dev
 
 # Instalar extensiones de PHP
 RUN docker-php-ext-install pdo pdo_pgsql pgsql
@@ -25,4 +26,4 @@ RUN composer install --no-dev --optimize-autoloader --no-scripts
 
 # COMANDO FINAL: Solo arrancar el servidor
 # Usamos el puerto 10000 que es el estándar de Render
-CMD php artisan serve --host=0.0.0.0 --port=10000
+CMD php artisan serve --host=0.0.0.0 --port=10000 #variable de entorno en web service
