@@ -1,20 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClubService {
-  private apiUrl = 'http://localhost:8000/api/clubs';
+  private apiUrl = `${environment.apiUrl}/clubs`; // url definida en environment.prod.ts
 
   constructor(private http: HttpClient) { }
 
-  getClubs(): Observable<any> {
-    // Es importante enviar el Token que guardaste en el login
+  // Método para obtener cabeceras con el Token 
+  private getHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    
-    return this.http.get(this.apiUrl, { headers });
+    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  }
+
+  getClubs(): Observable<any> {    
+    return this.http.get(this.apiUrl, { headers: this.getHeaders() });
+  }
+
+  // registrar un club
+  createClub(clubData: any): Observable<any> {
+    return this.http.post(this.apiUrl, clubData, { headers: this.getHeaders() });
   }
 }
