@@ -7,7 +7,7 @@
         <!-- SECCIÓN PARA ADMINISTRADOR -->
         <section *ngIf="rol === 1" class="mt-5 w-50 mx-auto"> <!-- rol 1 es administrador-->
             <h2 class=" mb-3"> Registrar nuevo club</h2>
-            <form class="club-form" (ngSubmit)="guardarClub()">
+            <form class="club-form">
             <div class="form-group">
                 <label>Nombre del Club:</label>
                 <input type="text" class="form-control mt-3 mb-3" name="nombre">
@@ -16,7 +16,7 @@
                 <label>Ciudad:</label>
                 <input type="text" class="form-control mt-3 mb-3" name="ciudad">
             </div>
-                <button type="submit" disabled class="btn btn-outline-dark mt-3">Guardar Club</button>
+                <button class="btn btn-outline-dark mt-3">Guardar Club</button>
             </form>
         </section>
 
